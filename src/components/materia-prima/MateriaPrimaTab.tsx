@@ -5,12 +5,12 @@ export default function MateriaPrimaTab() {
   const [searchTerm, setSearchTerm] = useState('')
 
   const materiaPrima = [
-    { id: 1, nome: 'Farinha de Trigo', estoque: 1500, minimo: 500, unidade: 'kg', status: 'ok', custo: 2.50 },
-    { id: 2, nome: 'Açúcar', estoque: 200, minimo: 300, unidade: 'kg', status: 'baixo', custo: 3.20 },
-    { id: 3, nome: 'Ovos', estoque: 800, minimo: 200, unidade: 'unid', status: 'ok', custo: 0.45 },
-    { id: 4, nome: 'Manteiga', estoque: 50, minimo: 100, unidade: 'kg', status: 'critico', custo: 12.00 },
-    { id: 5, nome: 'Fermento', estoque: 80, minimo: 50, unidade: 'kg', status: 'ok', custo: 8.50 },
-    { id: 6, nome: 'Leite', estoque: 120, minimo: 150, unidade: 'L', status: 'baixo', custo: 4.20 },
+    { id: 1, nome: 'Beneficiado', estoque: 230000, minimo: 64000, unidade: 'kg', status: 'ok', custo: 3.10 },
+    { id: 2, nome: 'Açúcar', estoque: 8000, minimo: 10000, unidade: 'kg', status: 'baixo', custo: 2.16 },
+    { id: 3, nome: 'Café Arábica', estoque: 1700, minimo: 400, unidade: 'kg', status: 'ok', custo: 6.99 },
+    { id: 4, nome: 'Carioca Classe A', estoque: 12000, minimo: 15000, unidade: 'kg', status: 'baixo', custo: 4.08 },
+    { id: 5, nome: 'Carioca Classe B', estoque: 0, minimo: 30000, unidade: 'kg', status: 'critico', custo: 3.83 },
+    { id: 6, nome: 'Carioca Classe C', estoque: 32000, minimo: 20000, unidade: 'kg', status: 'ok', custo: 3.51 },
   ]
 
   const getStatusColor = (status: string) => {

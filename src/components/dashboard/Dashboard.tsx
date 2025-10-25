@@ -1,11 +1,8 @@
 import { Package, AlertTriangle, TrendingUp, Truck, Factory } from 'lucide-react'
+import { useProdutos } from '../../context/ProdutosContext';
 
 export default function Dashboard() {
-  const produtosFabricados = [
-    { id: 1, nome: 'Pão Francês', estoque: 2000, demandaDiaria: 800, capacidadeProducao: 1200, unidade: 'unid' },
-    { id: 2, nome: 'Bolo de Chocolate', estoque: 50, demandaDiaria: 30, capacidadeProducao: 60, unidade: 'unid' },
-    { id: 3, nome: 'Croissant', estoque: 120, demandaDiaria: 100, capacidadeProducao: 150, unidade: 'unid' },
-  ]
+  const { produtos } = useProdutos();
 
   const containerStyle = {
     display: 'flex',
@@ -273,8 +270,12 @@ export default function Dashboard() {
           </h3>
           <div style={alertsContainerStyle}>
             <div style={getAlertItemStyle('#fef2f2')}>
-              <span style={alertTextStyle}>Manteiga - Estoque Crítico</span>
+              <span style={alertTextStyle}>Carioca Classe B - Estoque Crítico</span>
               <span style={getBadgeStyle('#fee2e2', '#991b1b')}>Urgente</span>
+            </div>
+            <div style={getAlertItemStyle('#fffbeb')}>
+              <span style={alertTextStyle}>Carioca Classe A - Abaixo do Mínimo</span>
+              <span style={getBadgeStyle('#fef3c7', '#92400e')}>Atenção</span>
             </div>
             <div style={getAlertItemStyle('#fffbeb')}>
               <span style={alertTextStyle}>Açúcar - Abaixo do Mínimo</span>
@@ -287,7 +288,7 @@ export default function Dashboard() {
         <div style={efficiencyCardStyle}>
           <h3 style={efficiencyHeaderStyle}>Eficiência de Produção</h3>
           <div style={productContainerStyle}>
-            {produtosFabricados.map(produto => {
+            {produtos.map(produto => {
               const eficiencia = (produto.estoque / produto.demandaDiaria * 100);
               return (
                 <div key={produto.id} style={productItemStyle}>

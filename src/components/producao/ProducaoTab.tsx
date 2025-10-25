@@ -1,14 +1,9 @@
+'use client'
+import { useProdutos } from '@/context/ProdutosContext'
 import { Factory, TrendingUp, AlertCircle, CheckCircle } from 'lucide-react'
 
 export default function ProducaoTab() {
-  const produtosFabricados = [
-    { id: 1, nome: 'Pão Francês', estoque: 2000, demandaDiaria: 800, capacidadeProducao: 1200, unidade: 'unid' },
-    { id: 2, nome: 'Bolo de Chocolate', estoque: 50, demandaDiaria: 30, capacidadeProducao: 60, unidade: 'unid' },
-    { id: 3, nome: 'Croissant', estoque: 120, demandaDiaria: 100, capacidadeProducao: 150, unidade: 'unid' },
-    { id: 4, nome: 'Torta de Frutas', estoque: 25, demandaDiaria: 15, capacidadeProducao: 40, unidade: 'unid' },
-    { id: 5, nome: 'Biscoitos', estoque: 300, demandaDiaria: 200, capacidadeProducao: 500, unidade: 'unid' },
-  ]
-
+  const { produtos , setProdutos } = useProdutos();
   const containerStyle = {
     display: 'flex',
     flexDirection: 'column' as const,
@@ -204,39 +199,29 @@ export default function ProducaoTab() {
 
       {/* Products Grid */}
       <div style={gridStyle}>
-        {produtosFabricados.map((produto) => {
-          const utilizacao = (produto.estoque / produto.capacidadeProducao) * 100
+        {produtos.map((produto) => {
+          // Agora a utilização é demanda / capacidade
+          const utilizacao = (produto.demandaDiaria / produto.capacidadeProducao) * 100
           const coberturaDias = produto.estoque / produto.demandaDiaria
           const coverageStyle = getCoverageAlertStyle(coberturaDias)
           const IconComponent = coberturaDias > 3 ? CheckCircle : AlertCircle
           
           return (
-            <div 
-              key={produto.id} 
-              style={cardStyle}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-4px)'
-                e.currentTarget.style.boxShadow = '0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)'
-                e.currentTarget.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)'
-              }}
-            >
-              {/* Card Header */}
-              <div style={cardHeaderStyle}>
-                <div style={iconContainerStyle}>
-                  <Factory style={{ width: '1.25rem', height: '1.25rem', color: '#a855f7' }} />
-                </div>
-                <h3 style={productNameStyle}>{produto.nome}</h3>
-              </div>
-              
-              <div style={dataContainerStyle}>
-                {/* Estoque Atual */}
-                <div style={dataRowStyle}>
-                  <span style={labelStyle}>Estoque Atual</span>
-                  <span style={valueStyle}>{produto.estoque} {produto.unidade}</span>
-                </div>
+    <div key={produto.id} style={cardStyle}>
+      {/* Header */}
+      <div style={cardHeaderStyle}>
+        <div style={iconContainerStyle}>
+          <Factory style={{ width: '1.25rem', height: '1.25rem', color: '#a855f7' }} />
+        </div>
+        <h3 style={productNameStyle}>{produto.nome}</h3>
+      </div>
+
+      <div style={dataContainerStyle}>
+        {/* Estoque Atual */}
+        <div style={dataRowStyle}>
+          <span style={labelStyle}>Estoque Atual</span>
+          <span style={valueStyle}>{produto.estoque} {produto.unidade}</span>
+        </div>
 
                 {/* Demanda Diária */}
                 <div style={dataRowStyle}>
